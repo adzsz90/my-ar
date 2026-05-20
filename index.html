@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta name="viewport"
@@ -12,9 +13,42 @@ user-scalable=no">
 
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+}
+
+#youtube-video{
+position:absolute;
+top:20px;
+left:20px;
+z-index:999;
+border-radius:20px;
+overflow:hidden;
+display:none;
+}
+
+</style>
+
 </head>
 
-<body style="margin:0; overflow:hidden;">
+<body>
+
+<div id="youtube-video">
+
+<iframe
+width="320"
+height="180"
+src="https://www.youtube.com/embed/eVxNksC88_U?autoplay=1&mute=0"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>
+
+</div>
 
 <a-scene embedded arjs>
 
@@ -24,7 +58,7 @@ user-scalable=no">
 gltf-model="model.glb"
 position="0 1 0"
 rotation="-90 0 0"
-scale="1 1 1">>
+scale="0.5 0.5 0.5">
 </a-entity>
 
 </a-marker>
@@ -32,6 +66,21 @@ scale="1 1 1">>
 <a-entity camera="fov:100"></a-entity>
 
 </a-scene>
+
+<script>
+
+const marker = document.querySelector("a-marker");
+const video = document.querySelector("#youtube-video");
+
+marker.addEventListener("markerFound", () => {
+video.style.display = "block";
+});
+
+marker.addEventListener("markerLost", () => {
+video.style.display = "none";
+});
+
+</script>
 
 </body>
 </html>
