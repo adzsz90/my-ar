@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 </head>
 
-<body style="margin : 0px; overflow: hidden;">
+<body>
 
-<a-scene embedded arjs>
+<a-scene
+  mindar-image="imageTargetSrc: targets.mind;"
+  color-space="sRGB"
+  embedded
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+>
 
-  <a-marker type="pattern" url="pattern-marker.patt">
+  <a-assets>
+    <a-asset-item id="model" src="model.glb"></a-asset-item>
+  </a-assets>
 
-    <a-box position="0 0.5 0"
-    color="red">
-    </a-box>
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-  </a-marker>
+  <a-entity mindar-image-target="targetIndex: 0">
 
-  <a-entity camera></a-entity>
+    <a-gltf-model
+      rotation="0 0 0"
+      position="0 0 0"
+      scale="0.2 0.2 0.2"
+      src="#model">
+    </a-gltf-model>
+
+  </a-entity>
 
 </a-scene>
 
